@@ -1,0 +1,51 @@
+.info {
+	grid-column: 1/-1;
+	grid-row: 1/2;
+	display: grid;
+	grid-template-columns: min-content 1fr;
+	grid-column-gap: 2.2rem;
+	position: relative;
+
+	&__photo {
+		display: block;
+		width: 13.8rem;
+		border-radius: 50%;
+		margin-top: 3rem;
+	}
+
+	&__about {
+		grid-column: 2/3;
+		display: grid;
+		grid-row-gap: 3rem;
+		padding: 2.6rem 0 3rem;
+	}
+
+	&__input {
+		border: none;
+		border-bottom: 2px solid $color-border;
+		background-color: transparent;
+		font-family: $font-family-roboto;
+		font-weight: 400;
+		font-size: 1.2rem;
+		text-transform: uppercase;
+		color: $color-text;
+		line-height: 0.7rem;
+		letter-spacing: 0.12em;
+
+		&:focus {
+			border: none;
+			border-bottom: 2px solid $color-blue;
+			outline: none;
+			color: $color-heading;
+			background-color: transparent;
+		}
+	}
+
+	&__stamp {
+		display: block;
+		position: absolute;
+		top: 7.3rem;
+		right: 0.4rem;
+		z-index: 1;
+	}
+}

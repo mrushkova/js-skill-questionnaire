@@ -1,0 +1,17 @@
+%heading {
+	font-family: $font-family-roboto;
+	font-weight: 400;
+	font-size: 1.8rem;
+	color: $color-heading;
+}
+
+.heading-1 {
+	@extend %heading;
+	line-height: 3rem;
+}
+
+.heading-2 {
+	@extend %heading;
+	line-height: 2.4rem;
+	margin: 0;
+}

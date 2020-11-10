@@ -1,0 +1,56 @@
+.skills {
+	grid-column: 1/-1;
+	grid-row: 2/3;
+
+	display: grid;
+	grid-template-rows: min-content 1fr;
+
+	&__heading {
+		grid-row: 1/2;
+		grid-template-columns: 1/-1;
+	}
+
+	&__list {
+		grid-column: 1/-1;
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		grid-row-gap: 4rem;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	&__item {
+		padding: 0;
+	}
+
+	&__label {
+		position: relative;
+		padding-left: 2.7rem;
+	}
+
+	&__checkbox {
+		width: 19px;
+		height: 19px;
+		display: inline-block;
+		position: absolute;
+		top: 0;
+		left: 0;
+		border-radius: 5px;
+		background-color: #eee;
+	}
+
+	&__skill {
+		font-size: 1.2rem;
+		line-height: 1;
+		letter-spacing: 0.12em;
+	}
+}
+
+.skills__input:checked + .skills__checkbox {
+	background: url("../images/checked.png") 50% 50% no-repeat $color-blue;
+}
+
+.skills__input:focus ~ .skills__skill {
+	color: $color-blue;
+}

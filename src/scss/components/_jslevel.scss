@@ -1,0 +1,43 @@
+.jslevel {
+	grid-column: 1/-1;
+	grid-row: 3/4;
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	align-items: center;
+
+	&__chart {
+		position: relative;
+		max-width: 25.3rem;
+	}
+
+	&__levels {
+		display: block;
+		width: 100%;
+	}
+
+	&__pointer {
+		position: absolute;
+		top: 100%;
+		left: 10.4rem;
+		transform: translate(-50%, -50%) rotate(0);
+		transition: 1.8s ease;
+	}
+
+	&__info {
+		display: grid;
+		grid-template-rows: repeat(2, min-content);
+		align-items: center;
+	}
+
+	&__heading--my,
+	&__heading--js {
+		display: block;
+	}
+
+	&__meter {
+		font-size: 5rem;
+		font-weight: 900;
+		line-height: 1;
+		color: $color-blue;
+	}
+}

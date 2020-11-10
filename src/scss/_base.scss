@@ -1,0 +1,24 @@
+*,
+*::before,
+*::after {
+	box-sizing: inherit;
+}
+
+html {
+	box-sizing: border-box;
+	font-size: 62.5%; //10px/16px = 62.5% -> 1rem = 10px
+	scroll-behavior: smooth;
+}
+
+body {
+	-webkit-font-smoothing: antialiased;
+	text-decoration-skip: objects;
+	text-rendering: optimizeLegibility;
+	text-size-adjust: 100%;
+	-webkit-tap-highlight-color: transparent;
+	font-family: $font-family-roboto;
+	font-weight: 500;
+	font-size: 1.2rem;
+	color: $color-text;
+	line-height: 2.2;
+}

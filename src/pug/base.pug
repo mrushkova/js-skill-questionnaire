@@ -1,0 +1,91 @@
+block vars
+	-
+		var baseDir = '/'
+	-
+		var title = 'Nine Lines Анкета'
+	-
+		var meta = {
+			charset: 'utf-8',
+			viewport: 'width=device-width',
+			XUACompatible: 'IE=edge',
+			description: 'Скажи мне кто ты и я скажу тебе твой уровень JavaScript!'
+		}
+	-
+		var link = {
+			icon16x16: 'images/favicon-16x16.png'
+		}
+
+doctype html
+html(lang="ru")
+	head
+		block head-start
+			block meta
+				if meta.charset !== null
+					meta(charset!=meta.charset)
+				if meta.XUACompatible !== null
+					meta(http-equiv="X-UA-Compatible" content!=meta.XUACompatible)
+				if meta.viewport !== null
+					meta(name="viewport" content!=meta.viewport)
+				if meta.description !== null
+					meta(name="description" content=meta.description)
+				if title !== null
+					title!= title
+			block links
+				if link.icon16x16 !== null
+					link(rel="icon" href!=link.icon16x16 sizes="16x16")
+			block styles
+				link(rel="stylesheet" href= "https://fonts.googleapis.com/css?family=Roboto:300,500,900&display=swap&subset=cyrillic")
+				link(rel="stylesheet" href="/css/main.css")
+		block head-end
+	body
+		block body-start
+			block content
+			main.container
+					.container__inner
+						.info
+							img.info__photo(src="./images/photo.jpg" srcset="./images/photo@2x.jpg 2x" alt="Фотография")
+							.info__about
+								input.info__input(type="text" name="name" placeholder="Имя" value="Мария Рушкова")
+								input.info__input(type="text" name="birthday" placeholder="Дата рождения" value="16.08.1990")
+								input.info__input(type="text" name="city" placeholder="Город" value="Гданьск")
+								input.info__input(type="email" name="contacts" placeholder="Контактные данные" value="maryrushkova@gmail.com")
+							img.info__stamp(src="./images/stamp.png" alt="Декор печать")
+						-
+							const skillsList = [
+							{ value: 'HTML5', status: 'checked' },
+							{ value: 'SASS', status: 'checked' },
+							{ value: 'VANILLAJS', status: 'checked', javascript: 'true' },
+							{ value: 'GIT', status: 'checked' },
+							{ value: 'CSS3', status: 'checked' },
+							{ value: 'LESS' },
+							{ value: 'ANGULAR', javascript: 'true' },
+							{ value: 'FOUNDATION' },
+							{ value: 'БЭМ', status: 'checked' },
+							{ value: 'GULP', status: 'checked', javascript: 'true' },
+							{ value: 'JQUERY', status: 'checked', javascript: 'true' },
+							{ value: 'BOOTSTRAP' }];	
+					
+						.skills
+							h1.heading-1.skills__heading Навыки
+							ul.skills__list
+								each n in skillsList
+									li.skills__item
+										label.skills__label
+											input.skills__input.visually-hidden(type="checkbox" 
+												name=n.value
+												checked=n.status
+												data-js=n.javascript)
+											span.skills__checkbox
+											span.skills__skill= n.value		
+						.jslevel.js-level
+							.jslevel__chart
+								img.jslevel__levels(src="./images/chart.png" alt="График")
+								img.jslevel__pointer(src="./images/arrow.png" alt="Указатель")
+							.jslevel__info
+								h2.jslevel__heading.heading-2 
+									span.jslevel__heading--my Мой уровень владения
+									span.jslevel__heading--js Java Script
+								p.jslevel__meter#meter 0
+			block scripts
+				script(src="./js/main.js" type="module")
+		block body-end	
