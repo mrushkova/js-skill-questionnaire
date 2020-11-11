@@ -1,25 +1,27 @@
-import {CountUp} from 'countup.js';
-
-const jsSkill = document.querySelector(".skills__input[data-js='true']");
+const jsSkills = document.querySelectorAll(".skills__input[data-js='true']");
 
 const jsLevel = () => {
-	const jsSkills = [...document.querySelectorAll('.skills__input[data-js="true"]:checked')];
+	const checkedJsSkills = [...document.querySelectorAll('.skills__input[data-js="true"]:checked')];
 
-	return jsSkills.length * 200;
+	return checkedJsSkills.length * 250;
 };
 
+let getJsLevel = jsLevel();
+
 const updateResult = () => {
-	const countUp = new CountUp(jsLevel());
-	countUp.start();
-	document.getElementById('meter').innerHTML = jsLevel();
+	getJsLevel = jsLevel();
+	document.getElementById('meter').innerHTML = getJsLevel;
 
 	const skillMeter = Math.round(jsLevel() * 180) / 1000;
 	const levelPointer = document.querySelector('.jslevel__pointer');
-	levelPointer.style.transform = ` translate(-50%, -50%) rotate(${skillMeter}deg)`;
+	levelPointer.style.transform = `translate(-50%, -50%) rotate(${skillMeter}deg)`;
 };
 
 updateResult();
 
-jsSkill.addEventListener('input', () => {
-	updateResult();
+jsSkills.forEach((skill) => {
+	skill.addEventListener('change', () => {
+		updateResult();
+	});
 });
+

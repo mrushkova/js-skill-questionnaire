@@ -2,7 +2,6 @@ let gulp = require('gulp');
 let gulpLoadPlugins = require('gulp-load-plugins');
 let yargs = require('yargs');
 let path = require('path');
-let del = require('del');
 let webpackConfig = require('./webpack.config');
 
 let emittyPug;
@@ -10,8 +9,10 @@ let errorHandler;
 
 let argv = yargs.default({
 	cache: true,
+	ci: false,
 	debug: true,
 	fix: false,
+	minify: false,
 	minifyHtml: null,
 	minifyCss: null,
 	minifyJs: null,
@@ -34,7 +35,9 @@ if (argv.ci) {
 	argv.notify = false;
 	argv.open = false;
 	argv.throwErrors = true;
+}
 
+if (argv.minifyJs) {
 	webpackConfig.mode = 'production';
 } else {
 	webpackConfig.mode = webpackConfig.mode || 'development';
@@ -57,7 +60,6 @@ let $ = gulpLoadPlugins({
 		'vinyl-buffer',
 		'webpack',
 		'webpack-stream',
-		'append-prepend',
 	],
 	scope: [
 		'dependencies',
@@ -211,27 +213,6 @@ gulp.task('pug', () => {
 });
 
 gulp.task('scss', () => {
-	const postcssPlugins = [
-		$.autoprefixer({
-			grid: 'autoplace',
-		}),
-	];
-
-	if (argv.minifyCss) {
-		postcssPlugins.push(
-			$.cssnano({
-				preset: [
-					'default',
-					{
-						discardComments: {
-							removeAll: true,
-						},
-					},
-				],
-			}),
-		);
-	}
-
 	return gulp.src([
 		'src/scss/*.scss',
 		'!src/scss/_*.scss',
@@ -242,7 +223,25 @@ gulp.task('scss', () => {
 		.pipe($.if(argv.debug, $.debug()))
 		.pipe($.sourcemaps.init())
 		.pipe($.sass().on('error', $.sass.logError))
-		.pipe($.postcss(postcssPlugins))
+		.pipe($.postcss([
+			argv.minifyCss ?
+				$.cssnano({
+					autoprefixer: {
+						add: true,
+						browsers: ['> 0%'],
+					},
+					calc: true,
+					discardComments: {
+						removeAll: true,
+					},
+					zindex: false,
+				})
+				:
+				$.autoprefixer({
+					add: true,
+					browsers: ['> 0%'],
+				}),
+		]))
 		.pipe($.sourcemaps.write('.'))
 		.pipe(gulp.dest('build/css'));
 });
@@ -264,10 +263,8 @@ gulp.task('lint:pug', () => {
 		.pipe($.plumber({
 			errorHandler,
 		}))
-		.pipe($.pugLinter({
-			reporter: 'default',
-			failAfterError: argv.throwErrors,
-		}));
+		.pipe($.pugLinter())
+		.pipe($.pugLinter.reporter(argv.throwErrors ? 'fail' : null));
 });
 
 gulp.task('lint:scss', () => {
@@ -305,14 +302,6 @@ gulp.task('lint:js', () => {
 		}))
 		.pipe($.eslint.format())
 		.pipe($.if((file) => file.eslint && file.eslint.fixed, gulp.dest('.')));
-});
-
-gulp.task('validate:html', () => {
-	return gulp.src('build/**/*.html')
-		.pipe($.plumber({
-			errorHandler,
-		}))
-		.pipe($.w3cHtmlValidator());
 });
 
 gulp.task('optimize:images', () => {
@@ -370,7 +359,11 @@ gulp.task('watch', () => {
 		delay: 0,
 	}, gulp.series('pug'))
 		.on('all', (event, file) => {
-			global.emittyPugChangedFile = event === 'unlink' ? undefined : file;
+			if (event === 'unlink') {
+				global.emittyPugChangedFile = undefined;
+			} else {
+				global.emittyPugChangedFile = file;
+			}
 		});
 
 	gulp.watch('src/scss/**/*.scss', gulp.series('scss'));
@@ -436,44 +429,20 @@ gulp.task('zip', () => {
 		.pipe(gulp.dest('zip'));
 });
 
-gulp.task('share', () => {
-	if (webpackConfig.mode !== 'production' || !argv.spa) {
-		return del([
-			'./build/index.php',
-			'./build/shareSettings.php',
-			'./build/.htaccess',
-		]);
-	}
-
-	gulp.src('./build/index.html')
-		.pipe($.if(argv.debug, $.debug()))
-		.pipe($.appendPrepend.prependFile('./src/resources/shareSettings.php'))
-		.pipe($.rename('index.php'))
-		.pipe(gulp.dest('build'));
-
-	return del([
-		'./build/index.html',
-		'./build/shareSettings.php',
-	]);
-});
-
 gulp.task('lint', gulp.series(
 	'lint:pug',
 	'lint:scss',
 	'lint:js',
 ));
 
-gulp.task('build', gulp.series(
+gulp.task('build', gulp.parallel(
 	'copy',
+	'images',
+	'sprites:png',
+	'sprites:svg',
 	'pug',
-	'share',
-	gulp.parallel(
-		'images',
-		'sprites:png',
-		'sprites:svg',
-		'scss',
-		'js',
-	),
+	'scss',
+	'js',
 ));
 
 gulp.task('default', gulp.series(

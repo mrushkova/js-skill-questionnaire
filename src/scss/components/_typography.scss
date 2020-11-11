@@ -1,4 +1,5 @@
-%heading {
+.heading-1,
+.heading-2 {
 	font-family: $font-family-roboto;
 	font-weight: 400;
 	font-size: 1.8rem;
@@ -6,12 +7,10 @@
 }
 
 .heading-1 {
-	@extend %heading;
 	line-height: 3rem;
 }
 
 .heading-2 {
-	@extend %heading;
-	line-height: 2.4rem;
 	margin: 0;
+	line-height: 2.4rem;
 }

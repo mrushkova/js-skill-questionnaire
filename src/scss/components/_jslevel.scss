@@ -17,8 +17,8 @@
 
 	&__pointer {
 		position: absolute;
-		top: 100%;
 		left: 10.4rem;
+		top: 100%;
 		transform: translate(-50%, -50%) rotate(0);
 		transition: 1.8s ease;
 	}
@@ -35,8 +35,8 @@
 	}
 
 	&__meter {
-		font-size: 5rem;
 		font-weight: 900;
+		font-size: 5rem;
 		line-height: 1;
 		color: $color-blue;
 	}
