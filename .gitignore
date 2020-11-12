@@ -6,6 +6,7 @@
 node_modules/
 bower_components/
 dist/
+build/
 zip/
 aero-debug.log
 aero-deploy.tar.gz
