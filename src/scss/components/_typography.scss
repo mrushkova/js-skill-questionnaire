@@ -1,16 +1,17 @@
-.heading-1,
-.heading-2 {
+@mixin heading {
+	margin: 0;
 	font-family: $font-family-roboto;
-	font-weight: 400;
+	font-weight: 500;
 	font-size: 1.8rem;
 	color: $color-heading;
 }
 
 .heading-1 {
+	@include heading;
 	line-height: 3rem;
 }
 
 .heading-2 {
-	margin: 0;
+	@include heading;
 	line-height: 2.4rem;
 }
