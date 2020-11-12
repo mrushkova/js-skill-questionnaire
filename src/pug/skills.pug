@@ -1,0 +1,28 @@
+-
+    const skillsList = [
+        { value: 'HTML5', status: 'checked' },
+        { value: 'SASS', status: 'checked' },
+        { value: 'VANILLAJS', status: 'checked', javascript: 'true' },
+        { value: 'GIT', status: 'checked' },
+        { value: 'CSS3', status: 'checked' },
+        { value: 'LESS' },
+        { value: 'ANGULAR', javascript: 'true' },
+        { value: 'FOUNDATION' },
+        { value: 'БЭМ', status: 'checked' },
+        { value: 'GULP', status: 'checked', javascript: 'true' },
+        { value: 'JQUERY', status: 'checked', javascript: 'true' },
+        { value: 'BOOTSTRAP' }
+    ];
+
+.skills
+    h1.heading-1.skills__heading Навыки
+    ul.skills__list
+        each n in skillsList
+            li.skills__item
+                label.skills__label
+                    input.skills__input.visually-hidden(type="checkbox" 
+                        name=n.value
+                        checked=n.status
+                        data-js=n.javascript)
+                    span.skills__checkbox
+                    span.skills__skill= n.value	

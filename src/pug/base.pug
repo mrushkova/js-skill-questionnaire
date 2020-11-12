@@ -40,52 +40,8 @@ html(lang="ru")
 	body
 		block body-start
 			block content
-			main.container
-					.container__inner
-						.info
-							img.info__photo(src="./images/photo.jpg" srcset="./images/photo@2x.jpg 2x" alt="Фотография")
-							.info__about
-								input.info__input(type="text" name="name" placeholder="Имя" value="Мария Рушкова")
-								input.info__input(type="text" name="birthday" placeholder="Дата рождения" value="16.08.1990")
-								input.info__input(type="text" name="city" placeholder="Город" value="Гданьск")
-								input.info__input(type="email" name="contacts" placeholder="Контактные данные" value="maryrushkova@gmail.com")
-							img.info__stamp(src="./images/stamp.png" alt="Декор печать")
-						-
-							const skillsList = [
-							{ value: 'HTML5', status: 'checked' },
-							{ value: 'SASS', status: 'checked' },
-							{ value: 'VANILLAJS', status: 'checked', javascript: 'true' },
-							{ value: 'GIT', status: 'checked' },
-							{ value: 'CSS3', status: 'checked' },
-							{ value: 'LESS' },
-							{ value: 'ANGULAR', javascript: 'true' },
-							{ value: 'FOUNDATION' },
-							{ value: 'БЭМ', status: 'checked' },
-							{ value: 'GULP', status: 'checked', javascript: 'true' },
-							{ value: 'JQUERY', status: 'checked', javascript: 'true' },
-							{ value: 'BOOTSTRAP' }];	
-					
-						.skills
-							h1.heading-1.skills__heading Навыки
-							ul.skills__list
-								each n in skillsList
-									li.skills__item
-										label.skills__label
-											input.skills__input.visually-hidden(type="checkbox" 
-												name=n.value
-												checked=n.status
-												data-js=n.javascript)
-											span.skills__checkbox
-											span.skills__skill= n.value		
-						.jslevel.js-level
-							.jslevel__chart
-								img.jslevel__levels(src="./images/chart.png" alt="График")
-								img.jslevel__pointer(src="./images/arrow.png" alt="Указатель")
-							.jslevel__info
-								h2.jslevel__heading.heading-2 
-									span.jslevel__heading--my Мой уровень владения
-									span.jslevel__heading--js Java Script
-									span.jslevel__meter#meter 0
+			include main.pug
 			block scripts
-				script(src="./js/main.js" type="module")
-		block body-end	
+				script(src="./js/vendor.js")
+				script(src="./js/main.js")
+		block body-end
