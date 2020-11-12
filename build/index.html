@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width">
+		<meta name="description" content="Скажи мне кто ты и я скажу тебе твой уровень JavaScript!">
+		<title>Nine Lines Анкета</title>
+		<link rel="icon" href="images/favicon-16x16.png" sizes="16x16">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,500,900&amp;display=swap&amp;subset=cyrillic">
+		<link rel="stylesheet" href="/css/main.css">
+	</head>
+	<body>
+		<main class="container">
+			<div class="container__inner">
+				<div class="info"><img class="info__photo" src="./images/photo.jpg" srcset="./images/photo@2x.jpg 2x" alt="Фотография">
+					<div class="info__about">
+						<input class="info__input" type="text" name="name" placeholder="Имя" value="Мария Рушкова">
+						<input class="info__input" type="text" name="birthday" placeholder="Дата рождения" value="16.08.1990">
+						<input class="info__input" type="text" name="city" placeholder="Город" value="Гданьск">
+						<input class="info__input" type="email" name="contacts" placeholder="Контактные данные" value="maryrushkova@gmail.com">
+					</div><img class="info__stamp" src="./images/stamp.png" alt="Декор печать">
+				</div>
+				<div class="skills">
+					<h1 class="heading-1 skills__heading">Навыки</h1>
+					<ul class="skills__list">
+						<li class="skills__item">
+							<label class="skills__label">
+								<input class="skills__input visually-hidden" type="checkbox" name="HTML5" checked="checked"><span class="skills__checkbox"></span><span class="skills__skill">HTML5</span>
+							</label>
+						</li>
+						<li class="skills__item">
+							<label class="skills__label">
+								<input class="skills__input visually-hidden" type="checkbox" name="SASS" checked="checked"><span class="skills__checkbox"></span><span class="skills__skill">SASS</span>
+							</label>
+						</li>
+						<li class="skills__item">
+							<label class="skills__label">
+								<input class="skills__input visually-hidden" type="checkbox" name="VANILLAJS" checked="checked" data-js="true"><span class="skills__checkbox"></span><span class="skills__skill">VANILLAJS</span>
+							</label>
+						</li>
+						<li class="skills__item">
+							<label class="skills__label">
+								<input class="skills__input visually-hidden" type="checkbox" name="GIT" checked="checked"><span class="skills__checkbox"></span><span class="skills__skill">GIT</span>
+							</label>
+						</li>
+						<li class="skills__item">
+							<label class="skills__label">
+								<input class="skills__input visually-hidden" type="checkbox" name="CSS3" checked="checked"><span class="skills__checkbox"></span><span class="skills__skill">CSS3</span>
+							</label>
+						</li>
+						<li class="skills__item">
+							<label class="skills__label">
+								<input class="skills__input visually-hidden" type="checkbox" name="LESS"><span class="skills__checkbox"></span><span class="skills__skill">LESS</span>
+							</label>
+						</li>
+						<li class="skills__item">
+							<label class="skills__label">
+								<input class="skills__input visually-hidden" type="checkbox" name="ANGULAR" data-js="true"><span class="skills__checkbox"></span><span class="skills__skill">ANGULAR</span>
+							</label>
+						</li>
+						<li class="skills__item">
+							<label class="skills__label">
+								<input class="skills__input visually-hidden" type="checkbox" name="FOUNDATION"><span class="skills__checkbox"></span><span class="skills__skill">FOUNDATION</span>
+							</label>
+						</li>
+						<li class="skills__item">
+							<label class="skills__label">
+								<input class="skills__input visually-hidden" type="checkbox" name="БЭМ" checked="checked"><span class="skills__checkbox"></span><span class="skills__skill">БЭМ</span>
+							</label>
+						</li>
+						<li class="skills__item">
+							<label class="skills__label">
+								<input class="skills__input visually-hidden" type="checkbox" name="GULP" checked="checked" data-js="true"><span class="skills__checkbox"></span><span class="skills__skill">GULP</span>
+							</label>
+						</li>
+						<li class="skills__item">
+							<label class="skills__label">
+								<input class="skills__input visually-hidden" type="checkbox" name="JQUERY" checked="checked" data-js="true"><span class="skills__checkbox"></span><span class="skills__skill">JQUERY</span>
+							</label>
+						</li>
+						<li class="skills__item">
+							<label class="skills__label">
+								<input class="skills__input visually-hidden" type="checkbox" name="BOOTSTRAP"><span class="skills__checkbox"></span><span class="skills__skill">BOOTSTRAP</span>
+							</label>
+						</li>
+					</ul>
+				</div>
+				<div class="jslevel js-level">
+					<div class="jslevel__chart"><img class="jslevel__levels" src="./images/chart.png" alt="График"><img class="jslevel__pointer" src="./images/arrow.png" alt="Указатель"></div>
+					<div class="jslevel__info">
+						<h2 class="jslevel__heading heading-2"> <span class="jslevel__heading--my">Мой уровень владения</span><span class="jslevel__heading--js">Java Script</span><span class="jslevel__meter">0</span></h2>
+					</div>
+				</div>
+			</div>
+		</main>
+		<script src="./js/vendor.js"></script>
+		<script src="./js/main.js"></script>
+	</body>
+</html>
