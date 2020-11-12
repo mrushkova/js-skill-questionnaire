@@ -116,16 +116,16 @@ gulp.task('copy', () => {
 		base: 'src/resources',
 		dot: true,
 	})
-		.pipe($.if(argv.cache, $.newer('build')))
+		.pipe($.if(argv.cache, $.newer('docs')))
 		.pipe($.if(argv.debug, $.debug()))
-		.pipe(gulp.dest('build'));
+		.pipe(gulp.dest('docs'));
 });
 
 gulp.task('images', () => {
 	return gulp.src('src/images/**/*.*')
-		.pipe($.if(argv.cache, $.newer('build/images')))
+		.pipe($.if(argv.cache, $.newer('docs/images')))
 		.pipe($.if(argv.debug, $.debug()))
-		.pipe(gulp.dest('build/images'));
+		.pipe(gulp.dest('docs/images'));
 });
 
 gulp.task('sprites:png', () => {
@@ -150,7 +150,7 @@ gulp.task('sprites:png', () => {
 			}))
 			.pipe($.vinylBuffer())
 			.pipe($.imagemin())
-			.pipe(gulp.dest('build/images')),
+			.pipe(gulp.dest('docs/images')),
 		spritesData.css
 			.pipe(gulp.dest('src/scss')),
 	);
@@ -172,7 +172,7 @@ gulp.task('sprites:svg', () => {
 		.pipe($.if(!argv.minifySvg, $.replace('><symbol', '>\n<symbol')))
 		.pipe($.if(!argv.minifySvg, $.replace('></svg', '>\n</svg')))
 		.pipe($.rename('sprites.svg'))
-		.pipe(gulp.dest('build/images'));
+		.pipe(gulp.dest('docs/images'));
 });
 
 gulp.task('pug', () => {
@@ -191,7 +191,7 @@ gulp.task('pug', () => {
 			.pipe($.pug({
 				pretty: argv.minifyHtml ? false : '\t',
 			}))
-			.pipe(gulp.dest('build'));
+			.pipe(gulp.dest('docs'));
 	}
 
 	return new Promise((resolve, reject) => {
@@ -205,7 +205,7 @@ gulp.task('pug', () => {
 				.pipe($.pug({
 					pretty: argv.minifyHtml ? false : '\t',
 				}))
-				.pipe(gulp.dest('build'))
+				.pipe(gulp.dest('docs'))
 				.on('end', resolve)
 				.on('error', reject);
 		});
@@ -243,7 +243,7 @@ gulp.task('scss', () => {
 				}),
 		]))
 		.pipe($.sourcemaps.write('.'))
-		.pipe(gulp.dest('build/css'));
+		.pipe(gulp.dest('docs/css'));
 });
 
 gulp.task('js', () => {
@@ -385,10 +385,10 @@ gulp.task('serve', () => {
 			open: argv.open,
 			port: argv.port,
 			files: [
-				'./build/**/*',
+				'./docs/**/*',
 			],
 			server: {
-				baseDir: './build',
+				baseDir: './docs',
 				middleware,
 			},
 		});
@@ -405,7 +405,7 @@ gulp.task('zip', () => {
 	let minutes = now.getMinutes().toString().padStart(2, '0');
 
 	return gulp.src([
-		'build/**',
+		'docs/**',
 		'src/**',
 		'.babelrc',
 		'.editorconfig',

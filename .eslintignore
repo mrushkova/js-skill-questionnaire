@@ -1,2 +1,2 @@
-build/**/*.js
+docs/**/*.js
 src/js/vendor/**/*
